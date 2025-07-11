@@ -1,0 +1,11 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    ofstream outFile("test2.dat", ios::binary);
+    int num = 100;
+    outFile.write(reinterpret_cast<char*>(&num), sizeof(num));
+    outFile.close();
+    return 0;
+}
