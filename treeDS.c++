@@ -6,7 +6,6 @@ int id = -1;
 int minValue;
 int maxValue;
 
-
 class Node {
 public:
     int data;
@@ -19,8 +18,6 @@ public:
         right = nullptr;
     }
 };
-
-// Global function for tree construction from preorder traversal with -1 as NULL
 Node* insertion(int arr[], int length) {
     id++;
     if (id >= length || arr[id] == -1) {
@@ -71,16 +68,63 @@ void LevelOrder(Node* root ){
         q.pop();
         cout << temp->data << " ";
 
+        if (temp->right != nullptr) {
+            q.push(temp->right);  // if left first it will go with left to right 
+        } 
         if (temp->left != nullptr) {
             q.push(temp->left);
         }
-        if (temp->right != nullptr) {
-            q.push(temp->right);
-        }
+        
     }
 }
+ void deleteNode( Node* root, int key) {
+        if (!root) return;
 
+        if (!root->left && !root->right) {
+            if (root->data == key) {
+                delete root;
+                root = nullptr;
+            }
+            return;
+        }
 
+        queue<Node*> q;
+        q.push(root);
+
+        Node* keyNode = nullptr;
+        Node* temp = nullptr;
+        Node* parent = nullptr;
+
+        while (!q.empty()) {
+            temp = q.front();
+            q.pop();
+
+            if (temp->data == key) {
+                keyNode = temp;
+            }
+
+            if (temp->left) {
+                parent = temp;
+                q.push(temp->left);
+            }
+
+            if (temp->right) {
+                parent = temp;
+                q.push(temp->right);
+            }
+        }
+
+        if (keyNode) {
+            keyNode->data = temp->data; 
+            if (parent->right == temp) {
+                delete parent->right;
+                parent->right = nullptr;
+            } else if (parent->left == temp) {
+                delete parent->left;
+                parent->left = nullptr;
+            }
+        }
+    }
 int main() {
     int arr[] = {1, 2, -1, -1, 3, 4, -1, -1, -1};
     minValue = arr[0];
@@ -104,5 +148,7 @@ int main() {
         cout << maxValue << "maxmimun value" << endl;
         cout << minValue << "minimun value" << endl;
 
+
+        cout << "deletion of node:\n"; 
     return 0;
 }
