@@ -8,6 +8,7 @@ int maxValue;
 
 class Node {
 public:
+int data ;
     int data;
     Node* left;
     Node* right;
@@ -79,11 +80,11 @@ void LevelOrder(Node* root ){
     }
 }
 
-void deleteNode(Node* root, int key) {
+void deleteNode(Node* root, int data) {
     if (!root) return;
 
     if (!root->left && !root->right) {
-        if (root->data == key) {
+        if (root->data == data) {
             delete root;
             root = nullptr;
         }
@@ -93,7 +94,7 @@ void deleteNode(Node* root, int key) {
     queue<Node*> q;
     q.push(root);
 
-    Node* keyNode = nullptr;
+    Node* dataNode = nullptr;
     Node* temp = nullptr;
     Node* parent = nullptr;
 
@@ -101,8 +102,8 @@ void deleteNode(Node* root, int key) {
         temp = q.front();
         q.pop();
 
-        if (temp->data == key) {
-            keyNode = temp;
+        if (temp->data == data) {
+            dataNode = temp;
         }
 
         if (temp->left) {
@@ -116,8 +117,8 @@ void deleteNode(Node* root, int key) {
         }
     }
 
-    if (keyNode) {
-        keyNode->data = temp->data; 
+    if (dataNode) {
+        dataNode->data = temp->data; 
         if (parent->right == temp) {
             delete parent->right;
             parent->right = nullptr;
@@ -128,28 +129,63 @@ void deleteNode(Node* root, int key) {
     }
 }
 
-Node* insert(Node* root , int key){
+Node* insert(Node* root , int data){
     if(root == nullptr){
-        return new Node(key);
+        return new Node(data);
     }
-    if(key > root->data){
-        root->right = insert(root->right, key);
-    } else if (key < root->data){
-        root->left = insert(root->left, key);    
+    if(data > root->data){
+        root->right = insert(root->right, data);
+    } else if (data < root->data){
+        root->left = insert(root->left, data);    
     }
     return root;
 }
 
-Node* search(Node* root, int key){
-    if(root == NULL || root->data == key){
+Node* search(Node* root, int data){
+    if(root == NULL || root->data == data){
         return root ;
     }
-    if(key > root->data){
-        return search(root->right , key);
+    if(data > root->data){
+        return search(root->right , data);
     } else {
-        return search(root->left , key);
+        return search(root->left , data);
     }
 }
+Node* getSuccessor(Node* curr){
+    curr = curr->right;
+    while (curr != nullptr && curr->left != nullptr)
+        curr = curr->left;
+    return curr;
+}
+Node* delNode (Node* root , int x ){
+if (root == nullptr)
+        return root;
+
+        if(root-> data > x ){
+            root->left == delNode(root->left, x);
+        }
+    else if (root->data < x){
+        root->right == delNode(root->right, x);
+    }
+    else{
+
+        if(root->left == nullptr){
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        }
+         if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+        Node* store = getSuccessor(root);
+        root->data = store->data;
+        root->right = delNode(root->right, store->data);
+    }
+    return root;
+}
+
 
 int main() {
     int arr[] = {1, 2, -1, -1, 3, 4, -1, -1, -1};
@@ -168,7 +204,7 @@ int main() {
     cout << "\n";
 
     cout << "Inorder Traversal of Tree:\n";
-    inOrder(root);
+    // inOrder(root);
     cout << "\n";
 
     cout << "Level Order Traversal of Tree:\n";
@@ -182,36 +218,46 @@ int main() {
     (insert(root,35) != NULL )? cout << "found\n": cout << "not found\n" ; 
     (search(root, 19) != NULL)? cout << "Found\n": 
             cout << "Not Found\n";
+
+                int x = 15;
+             root = delNode(root, x);
+    inOrder(root);
+
+
+    
     return 0;
+    return 0;
+
+    
 }
 
 // #include <iostream>
 // using namespace std;
 
 // struct Node {
-//     int key;
+//     int data;
 //     Node* left;
 //     Node* right;
 //     Node(int item) {
-//         key = item;
+//         data = item;
 //         left = right = NULL;
 //     }
 // };
 
-// // function to search a key in a BST
-// Node* search(Node* root, int key) {
+// // function to search a data in a BST
+// Node* search(Node* root, int data) {
   
-//     // Base Cases: root is null or key 
+//     // Base Cases: root is null or data 
 //     // is present at root
-//     if (root == NULL || root->key == key)
+//     if (root == NULL || root->data == data)
 //         return root;
 
-//     // Key is greater than root's key
-//     if (root->key < key)
-//         return search(root->right, key);
+//     // data is greater than root's data
+//     if (root->data < data)
+//         return search(root->right, data);
 
-//     // Key is smaller than root's key
-//     return search(root->left, key);
+//     // data is smaller than root's data
+//     return search(root->left, data);
 // }
 
 // // Driver Code
