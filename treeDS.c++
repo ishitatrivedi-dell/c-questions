@@ -93,10 +93,10 @@ void deleteNode(Node* root, int data) {
 
     queue<Node*> q;
     q.push(root);
-
-    Node* dataNode = nullptr;
-    Node* temp = nullptr;
-    Node* parent = nullptr;
+ 
+    Node* dataNode = nullptr; // value we want to delete
+    Node* temp = nullptr; // will always store the last (deepest) node of the tree
+    Node* parent = nullptr; // parent of the deepest node (needed to delete it)
 
     while (!q.empty()) {
         temp = q.front();
