@@ -1,26 +1,29 @@
 #include <iostream>
 #include <queue>
+#include <stack>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-int id = -1;
 int minValue;
 int maxValue;
 
 class Node {
 public:
-int data ;
     int data;
     Node* left;
     Node* right;
-
+    Node* parent;
     Node(int value) {
         data = value;
         left = nullptr;
         right = nullptr;
+        parent = nullptr; 
     }
 };
 
 // Binary Tree insertion using array with -1 as NULL
+int id = -1;
 Node* insertion(int arr[], int length) {
     id++;
     if (id >= length || arr[id] == -1) {
@@ -50,12 +53,8 @@ void inOrder(Node* root){
     if(!root) return ; 
     inOrder(root->left);
     cout << root->data << " ";
-    if(root->data < minValue){
-        minValue = root->data;
-    }
-    if(root->data > maxValue){
-        maxValue = root->data;
-    }
+    minValue = min(minValue, root->data);
+    maxValue = max(maxValue, root->data);
     inOrder(root->right);
 }
 
@@ -80,6 +79,23 @@ void LevelOrder(Node* root ){
     }
 }
 
+vector<int> CBT(vector<int> arr , int length){
+    vector<int> cbt = {0}; 
+    for(int i = 0 ; i < length; i++){
+        cbt.push_back(arr[i]);
+        int index = cbt.size()-1;
+        while(index > 1){
+            if(cbt[index] > cbt[index / 2]){
+                swap(cbt[index] , cbt[index / 2]);
+                index /=2;
+            } else {
+                break;
+            }
+        }
+    }
+    return cbt;
+}
+
 void deleteNode(Node* root, int data) {
     if (!root) return;
 
@@ -90,13 +106,12 @@ void deleteNode(Node* root, int data) {
         }
         return;
     }
-
     queue<Node*> q;
     q.push(root);
  
-    Node* dataNode = nullptr; // value we want to delete
-    Node* temp = nullptr; // will always store the last (deepest) node of the tree
-    Node* parent = nullptr; // parent of the deepest node (needed to delete it)
+    Node* dataNode = nullptr; 
+    Node* temp = nullptr; 
+    Node* parent = nullptr; 
 
     while (!q.empty()) {
         temp = q.front();
@@ -142,7 +157,7 @@ Node* insert(Node* root , int data){
 }
 
 Node* search(Node* root, int data){
-    if(root == NULL || root->data == data){
+    if(root == nullptr || root->data == data){
         return root ;
     }
     if(data > root->data){
@@ -151,30 +166,31 @@ Node* search(Node* root, int data){
         return search(root->left , data);
     }
 }
+
 Node* getSuccessor(Node* curr){
     curr = curr->right;
     while (curr != nullptr && curr->left != nullptr)
         curr = curr->left;
     return curr;
 }
+
 Node* delNode (Node* root , int x ){
-if (root == nullptr)
+    if (root == nullptr)
         return root;
 
-        if(root-> data > x ){
-            root->left == delNode(root->left, x);
-        }
-    else if (root->data < x){
-        root->right == delNode(root->right, x);
+    if(root->data > x ){
+        root->left = delNode(root->left, x);
     }
-    else{
-
+    else if (root->data < x){
+        root->right = delNode(root->right, x);
+    }
+    else {
         if(root->left == nullptr){
             Node* temp = root->right;
             delete root;
             return temp;
         }
-         if (root->right == nullptr) {
+        if (root->right == nullptr) {
             Node* temp = root->left;
             delete root;
             return temp;
@@ -188,11 +204,12 @@ if (root == nullptr)
 
 
 int main() {
-    int arr[] = {1, 2, -1, -1, 3, 4, -1, -1, -1};
+    int arr[] = {60,48,50,56,32,47};
     int length = sizeof(arr) / sizeof(arr[0]);
     minValue = arr[0];
     maxValue = arr[0];
 
+    id = -1; // reset before use
     Node* root = insertion(arr, length);
 
     cout << "Preorder Traversal of Tree:\n";
@@ -204,7 +221,7 @@ int main() {
     cout << "\n";
 
     cout << "Inorder Traversal of Tree:\n";
-    // inOrder(root);
+    inOrder(root);
     cout << "\n";
 
     cout << "Level Order Traversal of Tree:\n";
@@ -214,73 +231,19 @@ int main() {
     cout << maxValue << " is the maximum value" << endl;
     cout << minValue << " is the minimum value" << endl;
 
-
-    (insert(root,35) != NULL )? cout << "found\n": cout << "not found\n" ; 
-    (search(root, 19) != NULL)? cout << "Found\n": 
-            cout << "Not Found\n";
-
-                int x = 15;
-             root = delNode(root, x);
+    insert(root, 35);
+    cout << "After insertion of 35: \n";
     inOrder(root);
+    cout << "\n";
 
+    cout << "Search 19: ";
+    (search(root, 19) != nullptr)? cout << "Found\n": cout << "Not Found\n";
 
-    
+    int x = 15;
+    root = delNode(root, x);
+    cout << "After deleting 15 (if exists): \n";
+    inOrder(root);
+    cout << "\n";
+
     return 0;
-    return 0;
-
-    
 }
-
-// #include <iostream>
-// using namespace std;
-
-// struct Node {
-//     int data;
-//     Node* left;
-//     Node* right;
-//     Node(int item) {
-//         data = item;
-//         left = right = NULL;
-//     }
-// };
-
-// // function to search a data in a BST
-// Node* search(Node* root, int data) {
-  
-//     // Base Cases: root is null or data 
-//     // is present at root
-//     if (root == NULL || root->data == data)
-//         return root;
-
-//     // data is greater than root's data
-//     if (root->data < data)
-//         return search(root->right, data);
-
-//     // data is smaller than root's data
-//     return search(root->left, data);
-// }
-
-// // Driver Code
-// int main() {
-  
-//     // Creating a hard coded tree for keeping 
-//     // the length of the code small. We need 
-//     // to make sure that BST properties are 
-//     // maintained if we try some other cases.
-//     Node* root = new Node(50);
-//     root->left = new Node(30);
-//     root->right = new Node(70);
-//     root->left->left = new Node(20);
-//     root->left->right = new Node(40);
-//     root->right->left = new Node(60);
-//     root->right->right = new Node(80);
-  
-//     (search(root, 19) != NULL)? cout << "Found\n": 
-//                                cout << "Not Found\n";
-
-  
-//     (search(root, 80) != NULL)? cout << "Found\n": 
-//                                cout << "Not Found\n";
-
-//     return 0;
-// }
