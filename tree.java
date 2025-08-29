@@ -19,7 +19,7 @@ public class tree {
             parent = null;
         }
     }
-
+// bst insertion without array
     public static Node insert(Node root , int value) {
         if(root == null){
             return new Node(value);
@@ -36,6 +36,9 @@ public class tree {
         }
         return root ;
     }
+    // bt insertion with array
+
+    public static Node Insertion()
     public static void levelOrder(Node root){
         if(root == null){
             return ;
