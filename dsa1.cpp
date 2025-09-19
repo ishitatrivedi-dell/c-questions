@@ -25,7 +25,7 @@ public:
     head = nullptr;
    }
    void push_back(int value){
-    Node* newNode = new Node(value);
+    Node* newNode = new Node(value); // class as a constructor
 
     if(head==nullptr){
         head = newNode;
