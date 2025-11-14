@@ -196,76 +196,264 @@ using namespace std ;
 //     return 0;
 // }
 
-int main() {
-    string str = "hello";
+// int main() {
+//     string str = "hello";
 
-    int left = 0;                
-    int right = str.length() - 1; 
+//     int left = 0;                
+//     int right = str.length() - 1; 
 
-    while (left < right) {
+//     while (left < right) {
        
-        char temp = str[left];
-        str[left] = str[right];
-        str[right] = temp;
+//         char temp = str[left];
+//         str[left] = str[right];
+//         str[right] = temp;
 
-        left++;
-        right--;
+//         left++;
+//         right--;
+//     }
+
+//     cout << "Reversed string: " << str << endl;
+
+//     return 0;
+// }
+
+//   int main(){
+//       string str = "racecar";
+    
+//     int left = 0 ;
+//     int right = str.length()-1;
+//     bool isPalindrome = true ;
+    
+//     while (left < right){
+//         if(str[left] != str[right]){
+//              isPalindrome = false;
+//             break;
+//         }
+//         left++;
+//         right--;
+//     }
+    
+//     if (isPalindrome)
+//         cout << "The string is a palindrome." << endl;
+//     else
+//         cout << "The string is not a palindrome." << endl;
+
+//     return 0;
+//   }
+
+
+//   // frequency of characters in a string 
+//   int main(){
+//     string str = "aaabbc";
+//     int freq[256] = {0};
+//     for (char c : str){
+//         freq[c]++;
+//     }
+//     for (int i = 0; i < 256; i++){
+//         if (freq[i] > 0){
+//             cout << char(i) << ": " << freq[i] << endl;
+//         }
+//     }
+//   }
+
+  // frequecny of characters using map
+//   #include <map>
+//     int main(){
+//         string str = "aaabbc";
+//         map<char, int> freq;
+//         for (char c : str){
+//             freq[c]++;
+//         }
+//         for (auto pair : freq){
+//             cout << pair.first << ": " << pair.second << endl;
+//         }
+//     }
+    
+    // move negative numbers to the end
+    //  int arr[] = {-1,2,-3,-6,5,4,7};
+
+    // int main(){
+    //     int arr[] = {-1,2,-3,-6,5,4,7};
+    //     int n = sizeof(arr)/sizeof(arr[0]);
+    //     int left = 0;
+    //     int right = n - 1;
+
+    //     while (left < right){
+    //         while (left < right && arr[left] >= 0){
+    //             left++;
+    //         }
+    //         while (left < right && arr[right] < 0){
+    //             right--;
+    //         }
+    //         if (left < right){
+    //             swap(arr[left], arr[right]);
+    //             left++;
+    //             right--;
+    //         }
+    //     }
+
+    //     cout << "Array after moving negative numbers to the end: ";
+    //     for (int i = 0; i < n; i++){
+    //         cout << arr[i] << " ";
+    //     }
+    //     cout << endl;
+
+    //     return 0;
+    // }
+
+// move negative numbers to the end without changing the order
+// int main() {
+//     int arr[] = {-1, 2, -3, -6, 5, 4, 7};
+//     int n = sizeof(arr) / sizeof(arr[0]);
+//     vector<int> result;
+//     for (int i = 0; i < n; i++) {
+//         if (arr[i] >= 0) {
+//             result.push_back(arr[i]);
+//         }
+//     }
+//     for (int i = 0; i < n; i++) {
+//         if (arr[i] < 0) {
+//             result.push_back(arr[i]);
+
+//         }
+//     }
+//     cout << "Array after moving negative numbers to the end: ";
+//     for (int num : result) {
+//         cout << num << " ";
+//     }
+//     cout << endl;
+//     return 0;
+// }
+
+
+// sort 0's 1's and 2's
+
+// int main(){
+//     int arr[] = {0, 1, 2, 0, 1, 2, 1, 0};
+//     int n = sizeof(arr)/sizeof(arr[0]);
+//     int low = 0 , mid = 0 , high = n - 1 ;
+
+//     while (mid <= high){
+//         if (arr[mid] == 0){
+//             swap(arr[low], arr [mid]);
+//             low++;
+//             mid++;
+//         }
+//         else if (arr[mid] == 1){
+//             mid++;
+//         }
+//         else {
+//             swap(arr[mid], arr[high]);
+//             high--;
+//         }
+//     }
+
+//     cout << "Array after sorting 0's, 1's and 2's: ";
+//     for (int i = 0; i < n; i++){
+//         cout << arr[i] << " ";
+//     }
+//     cout << endl;
+
+//     return 0;
+// }
+
+
+// maximum subarray sum 
+
+// int arr[] = {2,3,-8,7,-1,2,3};
+// #include <climits>
+//  int main(){
+//     int arr[] = {2, 3, -8, 7, -1, 2, 3};
+//     int n = sizeof(arr) / sizeof(arr[0]);
+//     int maxSoFar = arr[0];
+//     int maxEndingHere = arr[0];
+
+//     for (int i = 1; i < n; i++) {
+//         maxEndingHere = max(arr[i], maxEndingHere + arr[i]);
+//         maxSoFar = max(maxSoFar, maxEndingHere);
+//     }
+
+//     cout << "Maximum subarray sum is: " << maxSoFar << endl;
+
+//     return 0;
+//  }
+
+// find non-repeating element 
+// int arr[] = {-1,2,-1,3,2};
+//  int main(){
+//     int arr[] = {-1, 2, -1, 3, 2};
+//     int n = sizeof(arr) / sizeof(arr[0]);
+//     int result = 0;
+
+//     for (int i = 0; i < n; i++) {
+//         result ^= arr[i];
+//     }
+
+//     cout << "The non-repeating element is: " << result << endl;
+
+//     return 0;
+//  }
+
+ // give it using map 
+//  #include <map>
+//  int main(){
+//     int arr[] = {-1, 2, -1, 3, 2};
+//     int n = sizeof(arr) / sizeof(arr[0]);
+//     map<int, int> freq;
+//     for (int i = 0; i < n; i++) {
+//         freq[arr[i]]++;
+//     }
+//     for (auto pair : freq) {
+//         if (pair.second == 1) {
+//             cout << "The non-repeating element is: " << pair.first << endl;
+//             break;
+
+//         }
+//     }
+//     return 0;
+//  }
+
+
+// product of array except the self element
+// int array = {1,2,3,4}
+
+/*
+
+phele product ,suffix order and prefix and suffix order 
+ the prefix is 1 1 2 6 
+ the suffix is 24 12 4 1 
+ and the product of prefix and suffix
+ 
+*/
+
+int main(){
+vector<int> nums = {1,2,3,4};
+int n = nums.size();
+
+    vector<int> prefix(n, 1);
+    vector<int> suffix(n, 1);
+    vector<int> result(n, 1);
+
+for(int i = 1; i < n; i++){
+        prefix[i] = prefix[i-1] * nums[i-1];
+
     }
 
-    cout << "Reversed string: " << str << endl;
+for (int i = n - 2; i >= 0; i--) {
+        suffix[i] = suffix[i + 1] * nums[i + 1];
+    }
+
+
+for (int i = 0; i < n; i++) {
+        result[i] = prefix[i] * suffix[i];
+    }
+
+cout << "Product Except Self: ";
+    for (int i = 0; i < n; i++) {
+        cout << result[i] << " ";
+    }
+    cout << endl;
 
     return 0;
 }
-
-  int main(){
-      string str = "racecar";
-    
-    int left = 0 ;
-    int right = str.length()-1;
-    bool isPalindrome = true ;
-    
-    while (left < right){
-        if(str[left] != str[right]){
-             isPalindrome = false;
-            break;
-        }
-        left++;
-        right--;
-    }
-    
-    if (isPalindrome)
-        cout << "The string is a palindrome." << endl;
-    else
-        cout << "The string is not a palindrome." << endl;
-
-    return 0;
-  }
-
-
-  // frequency of characters in a string 
-  int main(){
-    string str = "aaabbc";
-    int freq[256] = {0};
-    for (char c : str){
-        freq[c]++;
-    }
-    for (int i = 0; i < 256; i++){
-        if (freq[i] > 0){
-            cout << char(i) << ": " << freq[i] << endl;
-        }
-    }
-  }
-
-  // frequecny of characters using map
-  #include <map>
-    int main(){
-        string str = "aaabbc";
-        map<char, int> freq;
-        for (char c : str){
-            freq[c]++;
-        }
-        for (auto pair : freq){
-            cout << pair.first << ": " << pair.second << endl;
-        }
-    }
-    
+  
