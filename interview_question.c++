@@ -1,9 +1,11 @@
 //  Online C++ compiler to run C++ program online
 
-#include <iostream> 
-#include <algorithm> 
-#include <vector>   
-using namespace std ;
+// #include <iostream> 
+// #include <algorithm> 
+// #include <vector> 
+// #include <vector>
+// #include <climits>
+// using namespace std; 
 
 // int main() {
 
@@ -154,6 +156,7 @@ using namespace std ;
 //     return 0;
 // }
 
+// move zeroes to end of array
 // void MoveZeros(vector<int>& nums) {
 //     int left = 0;
 //     for (int right = 0; right < nums.size(); right++) {
@@ -426,34 +429,314 @@ phele product ,suffix order and prefix and suffix order
  
 */
 
-int main(){
-vector<int> nums = {1,2,3,4};
-int n = nums.size();
+// int main(){
+// vector<int> nums = {1,2,3,4};
+// int n = nums.size();
 
-    vector<int> prefix(n, 1);
-    vector<int> suffix(n, 1);
-    vector<int> result(n, 1);
+//     vector<int> prefix(n, 1);
+//     vector<int> suffix(n, 1);
+//     vector<int> result(n, 1);
 
-for(int i = 1; i < n; i++){
-        prefix[i] = prefix[i-1] * nums[i-1];
+// for(int i = 1; i < n; i++){
+//         prefix[i] = prefix[i-1] * nums[i-1];
 
-    }
+//     }
 
-for (int i = n - 2; i >= 0; i--) {
-        suffix[i] = suffix[i + 1] * nums[i + 1];
-    }
+// for (int i = n - 2; i >= 0; i--) {
+//         suffix[i] = suffix[i + 1] * nums[i + 1];
+//     }
 
 
-for (int i = 0; i < n; i++) {
-        result[i] = prefix[i] * suffix[i];
-    }
+// for (int i = 0; i < n; i++) {
+//         result[i] = prefix[i] * suffix[i];
+//     }
 
-cout << "Product Except Self: ";
-    for (int i = 0; i < n; i++) {
-        cout << result[i] << " ";
-    }
-    cout << endl;
+// cout << "Product Except Self: ";
+//     for (int i = 0; i < n; i++) {
+//         cout << result[i] << " ";
+//     }
+//     cout << endl;
 
-    return 0;
-}
+//     return 0;
+// }
   
+
+// best time to sell and buy stocks
+
+// int maxProfit(vector<int>& prices) {
+//     int minPrice = INT_MAX;
+//     int maxProfit = 0;
+
+//     for (int price : prices) {
+//         if (price < minPrice) {
+//             minPrice = price;
+//         }
+//         else if (price - minPrice > maxProfit) {
+//             maxProfit = price - minPrice;
+//         }
+//     }
+//     return maxProfit;
+// }
+
+// int main() {
+//     vector<int> prices = {7,1,5,3,6,4};
+
+//     cout << maxProfit(prices);
+
+//     return 0;
+// }
+
+// valid parentheses 
+
+// #include <iostream>
+// #include <stack>
+// #include <string>
+// using namespace std;
+
+// bool isValid(string s) {
+//     stack<char> st;
+
+//     for (char c : s) {
+//         if (c == '(' || c == '{' || c == '[') {
+//             st.push(c);
+//         }
+//         else {
+           
+//             if (st.empty()) return false;
+
+//             char top = st.top();
+//             st.pop();
+
+//             // Check if pair is valid
+//             if ((c == ')' && top != '(') ||
+//                 (c == '}' && top != '{') ||
+//                 (c == ']' && top != '[')) {
+//                 return false;
+//             }
+//         }
+//     }
+
+//     return st.empty();
+// }
+
+// int main() {
+//     string s = "()[{}]";
+//     cout << (isValid(s) ? "Valid" : "Invalid");
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+// 1.
+// int max = arr[0], min = arr[0];
+// for(int i = 1; i < n; i++){
+//     if(arr[i] > max) max = arr[i];
+//     if(arr[i] < min) min = arr[i];
+// }
+
+// 2.
+// int first = INT_MIN, second = INT_MIN, third = INT_MIN;
+
+// for(int x : arr){
+//     if(x > first){
+//         third = second;
+//         second = first;
+//         first = x;
+//     } else if(x > second && x != first){
+//         third = second;
+//         second = x;
+//     } else if(x > third && x != second && x != first){
+//         third = x;
+//     }
+// }
+
+
+//3.
+// int i = 0, j = n-1;
+// while(i < j){
+//     swap(arr[i], arr[j]);
+//     i++; j--;
+// }
+
+
+//4.
+// k = k % n;
+
+// reverse(arr, arr+n);
+// reverse(arr, arr+k);
+// reverse(arr+k, arr+n);
+
+//5.
+
+// int j = 0;
+// for(int i = 0; i < n; i++){
+//     if(arr[i] != 0){
+//         swap(arr[i], arr[j]);
+//         j++;
+//     }
+// }
+
+//6.
+// int j = 0;
+// for(int i = 1; i < n; i++){
+//     if(arr[i] != arr[j]){
+//         j++;
+//         arr[j] = arr[i];
+//     }
+// }
+// // new size = j+1
+// unordered_set<int> s;
+// for(int x : arr) s.insert(x);
+
+//7.
+// int gap = (n+m+1)/2;
+// while(gap > 0){
+//     int i = 0, j = gap;
+//     while(j < n+m){
+        // compare arr1 & arr2 positions based on i,j
+    // }
+    // gap = (gap==1 ? 0 : (gap+1)/2);
+// }
+
+//8.
+// unordered_set<int> s;
+// for(int x: arr1) s.insert(x);
+// for(int x: arr2) s.insert(x);
+
+// unordered_set<int> s(arr1.begin(), arr1.end());
+// vector<int> ans;
+// for(int x : arr2){
+//     if(s.count(x)) ans.push_back(x);
+// }
+
+//9.
+// int candidate = 0, count = 0;
+// for(int x : arr){
+//     if(count == 0){
+//         candidate = x;
+//         count = 1;
+//     }
+//     else if(x == candidate) count++;
+//     else count--;
+// }
+// return candidate;
+
+// 10.
+// unordered_set<int> s;
+// int prefix = 0;
+// for(int x : arr){
+//     prefix += x;
+//     if(prefix == 0 || s.count(prefix)) return true;
+//     s.insert(prefix);
+// }
+// return false;
+
+// 11.
+// int curr = 0, best = INT_MIN;
+// for(int x : arr){
+//     curr = max(x, curr + x);
+//     best = max(best, curr);
+// }
+// return best;
+
+//12. 
+// int curr = 0, best = INT_MIN;
+// for(int x : arr){
+//     curr = max(x, curr + x);
+//     best = max(best, curr);
+// }
+// return best;
+
+
+//13.
+// maximum subarray sum 
+
+// int arr[] = {2,3,-8,7,-1,2,3};
+// #include <climits>
+//  int main(){
+//     int arr[] = {2, 3, -8, 7, -1, 2, 3};
+//     int n = sizeof(arr) / sizeof(arr[0]);
+//     int maxSoFar = arr[0];
+//     int maxEndingHere = arr[0];
+
+//     for (int i = 1; i < n; i++) {
+//         maxEndingHere = max(arr[i], maxEndingHere + arr[i]);
+//         maxSoFar = max(maxSoFar, maxEndingHere);
+//     }
+
+//     cout << "Maximum subarray sum is: " << maxSoFar << endl;
+
+//     return 0;
+//  }
+
+//15.
+    //  for(int i = 0 ; i < nums.size(); i++){
+    //         for(int j = i+1 ; j < nums.size(); j++){
+    //             if(nums[i] + nums[j] == target){
+    //                 return {i,j};
+    //             }
+    //         }
+            
+    //     }
+    //     return {};
+    // }
+
+//19.
+//   int missingNumber(vector<int>& nums) {
+//         sort(nums.begin(), nums.end());
+//         for(int i = 0 ; i < nums[nums.size()-1]; i++){
+//             if(i != nums[i]){
+//                     return i;
+//             }
+//         }
+//         return nums[nums.size()-1] + 1;
+//     }
+
+// 25.
+// int main(){
+//     int n = 10 ;
+//     int num = 23 ;
+
+
+//     for(int i = 0 ; i < n ; i++)
+//     {
+//         if(num%i == 0){
+//             return true;
+//         }
+//     }
+
+//     return false;
+    
+
+
+// }
+
+// max subarray sum of legth k 
+
+// #include <iostream>
+// #include <algorithm>
+// using namespace std;
+// int main() {
+//    int arr[] = {2,1,5,1,3,2};
+//    int n = sizeof(arr)/sizeof(arr[0]);
+//    int k = 3 ;
+//    int currsum = 0 ;
+//    int maxsum = 0;
+   
+//    for(int i = 0 ; i < k ; i++){
+//        currsum += arr[i];
+//    }
+//    maxsum = currsum;
+   
+//    for(int i = k ; i < n ; i++){
+//        currsum = currsum + arr[i] - arr[i-k];
+//        maxsum = max(maxsum , currsum);
+//    }
+//     cout << "Maximum sum: " << maxsum << endl;
+//    return maxsum;
+// }
